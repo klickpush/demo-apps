@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Klickpush Offers Demo</title>
+    <link href="bootstrap.min.css" rel="stylesheet">
+    <link href="demo.css" rel="stylesheet">
+    <script type="text/javascript" src="jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="mustache.js"></script>
+    <script type="text/javascript" src="underscore-min.js"></script>
+    <script type="text/javascript" src="backbone-min.js"></script>
+    <script type="text/javascript" src="offers-router.js"></script>
+    <script type="text/javascript" src="initial-prompt-view.js"></script>
+    <script type="text/javascript" src="demo.js"></script>
+  </head>
+  <body>
+    <div id="content">
+      <!-- Use backbone views to render the contents of this frame -->
+    </div>
+
+    <!-- I don't love the idea of storing templates in the HTML but this will work for now
+          Need to get this demo out the door -->
+    <div id="templates" style="display:none">
+      <div id="initialPromptTemplate">
+        <div class="offer_text"></div>
+        <div class="vgood_offer"></div>
+        <div class="song_offer"></div>
+        <button class="btn generate">Generate</button>
+        <button class="btn claim">Claim</button>
+      </div>
+    </div>
+    <iframe id="apiframe" src="http://api.klickpush.com/apiframe" style="display:none" />
+  </body>
+</html>
+
