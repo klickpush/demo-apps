@@ -8,12 +8,14 @@
     <script type="text/javascript" src="mustache.js"></script>
     <script type="text/javascript" src="underscore-min.js"></script>
     <script type="text/javascript" src="backbone-min.js"></script>
-    <script type="text/javascript" src="offers-router.js"></script>
+    <script type="text/javascript" src="offer-model.js"></script>
     <script type="text/javascript" src="initial-prompt-view.js"></script>
+    <script type="text/javascript" src="claim-view.js"></script>
+    <script type="text/javascript" src="offers-router.js"></script>
     <script type="text/javascript" src="demo.js"></script>
   </head>
   <body>
-    <div id="content">
+    <div id="content" class="center">
       <!-- Use backbone views to render the contents of this frame -->
     </div>
 
@@ -26,6 +28,13 @@
         <div class="song_offer"></div>
         <button class="btn generate">Generate</button>
         <button class="btn claim">Claim</button>
+      </div>
+      <div id="claimViewTemplate">
+        <div class="offer_text">Claim your offer</p>
+        <div class="vgood_offer"><img src="{{vgoodImgSrc}}" alt="{{vgoodName}}" /></div>
+        <div class="song_offer"><img src="{{singleImgSrc}}" alt="{{singleImgName}}" /></div>
+        <button class="btn cancel">Cancel</button>
+        <button class="btn submit">Submit</button>
       </div>
     </div>
     <iframe id="apiframe" src="http://api.klickpush.com/apiframe" style="display:none" />
