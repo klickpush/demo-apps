@@ -9,8 +9,10 @@
     <script type="text/javascript" src="underscore-min.js"></script>
     <script type="text/javascript" src="backbone-min.js"></script>
     <script type="text/javascript" src="offer-model.js"></script>
+    <script type="text/javascript" src="virtual-good-model.js"></script>
     <script type="text/javascript" src="initial-prompt-view.js"></script>
     <script type="text/javascript" src="claim-view.js"></script>
+    <script type="text/javascript" src="thanks-view.js"></script>
     <script type="text/javascript" src="offers-router.js"></script>
     <script type="text/javascript" src="demo.js"></script>
   </head>
@@ -29,12 +31,19 @@
         <button class="btn generate">Generate</button>
         <button class="btn claim">Claim</button>
       </div>
-      <div id="claimViewTemplate">
-        <div class="offer_text">Claim your offer</p>
-        <div class="vgood_offer"><img src="{{vgoodImgSrc}}" alt="{{vgoodName}}" /></div>
-        <div class="song_offer"><img src="{{singleImgSrc}}" alt="{{singleImgName}}" /></div>
+      <div id="claimViewTemplate" style="display:none">
+        <div class="offer_text">Claim your offer</div>
+        <div class="vgood_offer"><img src="virtual_good_images/{{vgoodImgSrc}}" alt="{{vgoodName}}" />
+        <div class="song_offer"><img src="{{singleImgSrc}}" alt="{{singleImgName}}" />
+        <form>
+          <input type="text" class="span3" placeholder="Enter Email Address" />
+        </form>
         <button class="btn cancel">Cancel</button>
         <button class="btn submit">Submit</button>
+      </div>
+      <div id="thanksViewTemplate" style="display:none">
+        <div class="thanks_text">Thank You! Your song is on the way</div>
+        <button class="btn getmore">Get More Offers</button>
       </div>
     </div>
     <iframe id="apiframe" src="http://api.klickpush.com/apiframe" style="display:none" />

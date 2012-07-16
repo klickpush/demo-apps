@@ -2,13 +2,20 @@
 # Prefiat LLC for Klickpush
 
 class ClaimView extends Backbone.View
+  initialize: (params) ->
+    @offerModel         = params.offerModel
+    @virtualGoodModel   = params.virtualGoodModel
+ 
   events:
     'click .btn.cancel':    'cancelClicked'
+    'click .btn.submit':    'submitClicked'
 
   render: ->
     templateData =
-      singleImgSrc:   @model.get('artwork')
-      singleImgName:  @model.get('artist')
+      singleImgSrc:   @offerModel.get('artwork')
+      singleImgName:  @offerModel.get('artist_name')
+      vgoodImgSrc:    @virtualGoodModel.get('path')
+      vgoodName:      @virtualGoodModel.get('name')
 
     template = $('#claimViewTemplate').html()
     @$el.append(Mustache.to_html(template, templateData))
@@ -17,5 +24,8 @@ class ClaimView extends Backbone.View
 
   cancelClicked: ->
     window.location.hash = "offer"
+
+  submitClicked: ->
+    window.location.hash = "thanks"
 
 (exports ? this).ClaimView = ClaimView

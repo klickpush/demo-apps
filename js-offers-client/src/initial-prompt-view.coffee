@@ -9,7 +9,9 @@ class InitialPromptView extends Backbone.View
     'click .btn.generate':    'generateClicked'
     'click .btn.claim':       'claimClicked'
 
-  initialize: ->
+  initialize: (params) ->
+    @offerModel         = params.offerModel
+    @virtualGoodModel   = params.virtualGoodModel
     window.addEventListener("message", @messageDispatcher, false)
     that = this
 
@@ -54,13 +56,16 @@ class InitialPromptView extends Backbone.View
   singleOfferResponseHandler: (singleArray) ->
     if singleArray.length > 0
       # Should factor more view logic into offer model
-      @model.set(singleArray[0])
-      virtualGood = @getRandomVirtualGood()
+      @offerModel.set(singleArray[0])
+      @getRandomVirtualGood()
 
-      @$el.children('.offer_text').empty().html("Purchase the #{virtualGood['name']} and " +
-        "get #{@model.get('track').track_name} by #{@model.get('artist')} for free")
-      @$el.children('.vgood_offer').empty().html("<img src='virtual_good_images/#{virtualGood["path"]}' />")
-      @$el.children('.song_offer').empty().html("<img src='#{@model.get('artwork')}' />")
+      @$el.children('.offer_text').empty().html("Purchase the " +
+        "#{@virtualGoodModel.get('name')} and " +
+        "get #{@offerModel.get('track').track_name} by " +
+        "#{@offerModel.get('artist_name')} for free")
+      @$el.children('.vgood_offer').empty().html(
+        "<img src='virtual_good_images/#{@virtualGoodModel.get('path')}' />")
+      @$el.children('.song_offer').empty().html("<img src='#{@offerModel.get('artwork')}' />")
     else
       console.log("Empty response from server")
 
@@ -76,7 +81,6 @@ class InitialPromptView extends Backbone.View
       { name: "revive",         path: "revive.png"        } ]
 
     goodIndex = Math.floor(Math.random() * goods.length)
-
-    goods[goodIndex]
+    @virtualGoodModel.set(goods[goodIndex])
 
 (exports ? this).InitialPromptView = InitialPromptView
