@@ -23,29 +23,27 @@
 
     <!-- I don't love the idea of storing templates in the HTML but this will work for now
           Need to get this demo out the door -->
-    <div id="templates" style="display:none">
-      <div id="initialPromptTemplate">
+      <script type="template/mustache" id="initialPromptTemplate">
         <div class="offer_text"></div>
         <div class="vgood_offer"></div>
         <div class="song_offer"></div>
         <button class="btn generate">Generate</button>
         <button class="btn claim">Claim</button>
-      </div>
-      <div id="claimViewTemplate" style="display:none">
+      </script>
+      <script type="template/mustache" id="claimViewTemplate">
         <div class="offer_text">Claim your offer</div>
         <div class="vgood_offer"><img src="virtual_good_images/{{vgoodImgSrc}}" alt="{{vgoodName}}" />
         <div class="song_offer"><img src="{{singleImgSrc}}" alt="{{singleImgName}}" />
         <form>
-          <input type="text" class="span3" placeholder="Enter Email Address" />
+          <input id="email_address" type="text" class="span3" placeholder="Enter Email Address" />
         </form>
         <button class="btn cancel">Cancel</button>
         <button class="btn submit">Submit</button>
-      </div>
-      <div id="thanksViewTemplate" style="display:none">
+      </script>
+      <script type="template/mustache" id="thanksViewTemplate">
         <div class="thanks_text">Thank You! Your song is on the way</div>
         <button class="btn getmore">Get More Offers</button>
-      </div>
-    </div>
+      </script>
     <iframe id="apiframe" src="http://api.klickpush.com/apiframe" style="display:none" />
   </body>
 </html>

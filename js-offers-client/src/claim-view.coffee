@@ -26,6 +26,12 @@ class ClaimView extends Backbone.View
     window.location.hash = "offer"
 
   submitClicked: ->
+    $('#apiframe')[0].contentWindow.postMessage
+      type:       'offerAcceptance'
+      recipient:  $('#email_address').val()
+      songUrl:    @offerModel.get('track').urls.original
+    , "http://api.klickpush.com"
+
     window.location.hash = "thanks"
 
 (exports ? this).ClaimView = ClaimView
