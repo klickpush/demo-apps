@@ -12,23 +12,27 @@ class InitialPromptView extends Backbone.View
   initialize: (params) ->
     @offerModel         = params.offerModel
     @virtualGoodModel   = params.virtualGoodModel
+    @userLocationModel  = params.userLocationModel
+
     window.addEventListener("message", @messageDispatcher, false)
     that = this
 
   render: ->
-    template  = $("#initialPromptTemplate").html()
-    @$el.append(Mustache.to_html(template))
+    @userLocationModel.getLocation =>
+      template  = $("#initialPromptTemplate").html()
+      @$el.append(Mustache.to_html(template))
+      console.log("latitude: #{@userLocationModel.get('latitude')}, longitude: #{@userLocationModel.get('longitude')}")
 
     this
 
   # Event handlers
   messageDispatcher: (event) ->
-    if(event.origin == "http://api.klickpush.com")     # Don't want any cross-domain tomfoolery
-      switch event.data.type
-        when 'initComplete'
-          that.requestOffer()
-        when 'singleOfferRequestComplete'
-          that.singleOfferResponseHandler(event.data.response)
+    #if(event.origin == "http://api.klickpush.com")     # Don't want any cross-domain tomfoolery
+    switch event.data.type
+      when 'initComplete'
+        that.requestOffer()
+      when 'singleOfferRequestComplete'
+        that.singleOfferResponseHandler(event.data.response)
 
   generateClicked: ->
     console.log("Generate called")
@@ -40,13 +44,13 @@ class InitialPromptView extends Backbone.View
       oauthConsumerSecret:    'demo-secret'
       oauthAccessTokenKey:    'demo-access-token'
       oauthAccessTokenSecret: 'demo-access-token-secret'
-    , "http://api.klickpush.com"
+    , "http://client.klickpush.com:3000"
 
   requestOffer: ->
     # Send a message to the iframe handler requesting an offer
     # Pass a callback that renders the offer when we return
     $('#apiframe')[0].contentWindow.postMessage(type: "singleOfferRequest", genre: "rock",
-      "http://api.klickpush.com")
+      "http://client.klickpush.com:3000")
 
   claimClicked: ->
     # Navigate to claim view
@@ -68,7 +72,6 @@ class InitialPromptView extends Backbone.View
       @$el.children('.song_offer').empty().html("<img src='#{@offerModel.get('artwork')}' />")
     else
       console.log("Empty response from server")
-
 
   getRandomVirtualGood: (goodIndex) ->
     goods = [ { name: "bomb", path: "bomb.png"  },

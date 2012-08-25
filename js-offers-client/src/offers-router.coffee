@@ -3,8 +3,9 @@
 
 class OffersRouter extends Backbone.Router
   initialize: ->
-    @offerModel       = new OfferModel()
-    @virtualGoodModel = new VirtualGoodModel()
+    @offerModel         = new OfferModel()
+    @virtualGoodModel   = new VirtualGoodModel()
+    @userLocationModel  = new UserLocationModel()
 
   routes:
     "":       "default"
@@ -20,18 +21,20 @@ class OffersRouter extends Backbone.Router
     $('#content').empty()
 
     ipv = new InitialPromptView
-      el: $('#content'),
-      offerModel: @offerModel,
-      virtualGoodModel: @virtualGoodModel
+      el:                 $('#content'),
+      offerModel:         @offerModel,
+      virtualGoodModel:   @virtualGoodModel
+      userLocationModel:  @userLocationModel
     ipv.render()
 
   claim: ->
     $('#content').empty()
 
     claimView = new ClaimView
-      el: $('#content'),
-      offerModel: @offerModel,
-      virtualGoodModel: @virtualGoodModel
+      el:                 $('#content'),
+      offerModel:         @offerModel,
+      virtualGoodModel:   @virtualGoodModel
+      userLocationModel:  @userLocationModel
     claimView.render()
 
   thanks: ->

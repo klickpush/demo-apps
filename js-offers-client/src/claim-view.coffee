@@ -5,20 +5,22 @@ class ClaimView extends Backbone.View
   initialize: (params) ->
     @offerModel         = params.offerModel
     @virtualGoodModel   = params.virtualGoodModel
+    @userLocationModel  = params.userLocationModel
  
   events:
     'click .btn.cancel':    'cancelClicked'
     'click .btn.submit':    'submitClicked'
 
   render: ->
-    templateData =
-      singleImgSrc:   @offerModel.get('artwork')
-      singleImgName:  @offerModel.get('artist_name')
-      vgoodImgSrc:    @virtualGoodModel.get('path')
-      vgoodName:      @virtualGoodModel.get('name')
+    @userLocationModel.getLocation =>
+      templateData =
+        singleImgSrc:   @offerModel.get('artwork')
+        singleImgName:  @offerModel.get('artist_name')
+        vgoodImgSrc:    @virtualGoodModel.get('path')
+        vgoodName:      @virtualGoodModel.get('name')
 
-    template = $('#claimViewTemplate').html()
-    @$el.append(Mustache.to_html(template, templateData))
+      template = $('#claimViewTemplate').html()
+      @$el.append(Mustache.to_html(template, templateData))
 
     this
 
