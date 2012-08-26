@@ -40,17 +40,17 @@ class InitialPromptView extends Backbone.View
     # Configure the library
     $('#apiframe')[0].contentWindow.postMessage
       type:                   'init'
-      oauthConsumerKey:       'demo'
-      oauthConsumerSecret:    'demo-secret'
-      oauthAccessTokenKey:    'demo-access-token'
-      oauthAccessTokenSecret: 'demo-access-token-secret'
-    , "http://client.klickpush.com:3000"
+      oauthConsumerKey:       'mOXeIFqH27ynJcq68WSYbIDabno4clNnWgwS3WXA'
+      oauthConsumerSecret:    'miGEx9kJjMA2UOtwjR0Qay9zrANuSYC1gCJO15HO'
+      oauthAccessTokenKey:    'EYolXAeRIRMcjeyXr4Ha634vq9aiZIshlpZHY7NN'
+      oauthAccessTokenSecret: '3wvZJxVCsuZqd4a6yRpLHj7VmEImULrKA0yjE9C5'
+    , "http://api.klickpush.com"
 
   requestOffer: ->
     # Send a message to the iframe handler requesting an offer
     # Pass a callback that renders the offer when we return
     $('#apiframe')[0].contentWindow.postMessage(type: "singleOfferRequest", genre: "rock",
-      "http://client.klickpush.com:3000")
+      "http://api.klickpush.com")
 
   claimClicked: ->
     # Navigate to claim view

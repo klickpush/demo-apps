@@ -12,15 +12,14 @@ class ClaimView extends Backbone.View
     'click .btn.submit':    'submitClicked'
 
   render: ->
-    @userLocationModel.getLocation =>
-      templateData =
-        singleImgSrc:   @offerModel.get('artwork')
-        singleImgName:  @offerModel.get('artist_name')
-        vgoodImgSrc:    @virtualGoodModel.get('path')
-        vgoodName:      @virtualGoodModel.get('name')
+    templateData =
+      singleImgSrc:   @offerModel.get('artwork')
+      singleImgName:  @offerModel.get('artist_name')
+      vgoodImgSrc:    @virtualGoodModel.get('path')
+      vgoodName:      @virtualGoodModel.get('name')
 
-      template = $('#claimViewTemplate').html()
-      @$el.append(Mustache.to_html(template, templateData))
+    template = $('#claimViewTemplate').html()
+    @$el.append(Mustache.to_html(template, templateData))
 
     this
 
@@ -30,8 +29,10 @@ class ClaimView extends Backbone.View
   submitClicked: ->
     $('#apiframe')[0].contentWindow.postMessage
       type:       'offerAcceptance'
+      track_id:   @offerModel.get('track').id
       recipient:  $('#email_address').val()
-      songUrl:    @offerModel.get('track').urls.original
+      latitude:   @userLocationModel.get('latitude')
+      longitude:  @userLocationModel.get('longitude')
     , "http://api.klickpush.com"
 
     window.location.hash = "thanks"
