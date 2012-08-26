@@ -15,6 +15,8 @@ class UserLocationModel extends Backbone.Model
         callback()
 
       navigator.geolocation.getCurrentPosition(geolocationCallback)
+    else
+      callback()
 
   # Check whether the browser supports location queries
   browserSupport: ->

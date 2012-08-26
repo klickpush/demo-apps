@@ -19,9 +19,10 @@ class OffersRouter extends Backbone.Router
   # Start here
   offer: ->
     $('#content').empty()
+    offerDiv = $('#content').append($('<div>').attr('id', 'offer'))
 
     ipv = new InitialPromptView
-      el:                 $('#content'),
+      el:                 $('#offer'),
       offerModel:         @offerModel,
       virtualGoodModel:   @virtualGoodModel
       userLocationModel:  @userLocationModel
@@ -29,9 +30,10 @@ class OffersRouter extends Backbone.Router
 
   claim: ->
     $('#content').empty()
+    claimDiv = $('#content').append($('<div>').attr('id', 'claim'))
 
     claimView = new ClaimView
-      el:                 $('#content'),
+      el:                 $('#claim'),
       offerModel:         @offerModel,
       virtualGoodModel:   @virtualGoodModel
       userLocationModel:  @userLocationModel
@@ -39,8 +41,9 @@ class OffersRouter extends Backbone.Router
 
   thanks: ->
     $('#content').empty()
+    thanksDiv = $('#content').append($('<div>').attr('id', 'thanks'))
 
-    thanksView = new ThanksView(el: $('#content'))
+    thanksView = new ThanksView(el: $('#thanks'))
     thanksView.render()
 
 (exports ? this).OffersRouter = OffersRouter
