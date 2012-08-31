@@ -6,4 +6,4 @@ demo:
 	cp ../src/*.js .
 
 clean:
-	rm -rf *.js *.json *.html *.png *.css virtual_good_images
+	rm -rf *.js *.json *.html *.png *.css assets virtual_good_images

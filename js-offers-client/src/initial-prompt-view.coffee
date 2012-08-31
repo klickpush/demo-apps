@@ -70,6 +70,8 @@ class InitialPromptView extends Backbone.View
       @$el.children('.vgood_offer').empty().html(
         "<img src='virtual_good_images/#{@virtualGoodModel.get('path')}' />")
       @$el.children('.song_offer').empty().html("<img src='#{@offerModel.get('artwork')}' />")
+      @$el.children('.song_player').empty().html("<audio controls='controls' style='margin-top:10px;'>" +
+        "<source src='#{@offerModel.get('track').urls.preview}' type='audio/mpeg'></audio>")
     else
       console.log("Empty response from server")
 
