@@ -1,28 +1,13 @@
-var width = 320, 
-	height = 500,
-	gLoop,
-	points = 0,
-	state = true,
-	c = document.getElementById('c'), 
-	ctx = c.getContext('2d');
-			
-	c.width = width;
-	c.height = height;
+var width = 320, height = 500, gLoop, points = 0, state = true, howManyCircles = 10, circles = [], c, ctx;
 
-
-var clear = function(){
+var clear = function() {
 	ctx.fillStyle = '#d0e7f9';
 	ctx.clearRect(0, 0, width, height);
 	ctx.beginPath();
 	ctx.rect(0, 0, width, height);
 	ctx.closePath();
 	ctx.fill();
-}
-
-var howManyCircles = 10, circles = [];
-
-for (var i = 0; i < howManyCircles; i++) 
-	circles.push([Math.random() * width, Math.random() * height, Math.random() * 100, Math.random() / 2]);
+};
 
 var DrawCircles = function(){
 	for (var i = 0; i < howManyCircles; i++) {
@@ -168,10 +153,6 @@ var player = new (function(){
 	}
 })();
 
-
-player.setPosition(~~((width-player.width)/2), height - player.height);
-player.jump();
-
 document.onmousemove = function(e){
 	if (player.X + c.offsetLeft > e.pageX) {
 		player.moveLeft();
@@ -298,4 +279,20 @@ var GameLoop = function(){
 		
 	};
 	
-GameLoop();
+window.gameStart = function() {
+  c = document.getElementById('c'), 
+	ctx = c.getContext('2d');
+			
+	c.width = width;
+	c.height = height;
+
+  for (var i = 0; i < howManyCircles; i++) {
+	  circles.push([Math.random() * width, Math.random() * height, Math.random() * 100, Math.random() / 2]);
+  }
+
+  player.setPosition(~~((width-player.width)/2), height - player.height);
+  player.jump();
+
+  GameLoop();
+};
+
