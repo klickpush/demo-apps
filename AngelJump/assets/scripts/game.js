@@ -265,19 +265,22 @@ var GameLoop = function(){
 		gLoop = setTimeout(GameLoop, 1000 / 50);
 }
 
-	var GameOver = function(){
-		state = false;
-		clearTimeout(gLoop);
-		setTimeout(function(){
-			clear();
+var GameOver = function(){
+  state = false;
+	clearTimeout(gLoop);
+
+	setTimeout(function() {
+	  clear();
 			
-			ctx.fillStyle = "Black";
-			ctx.font = "10pt Arial";
-			ctx.fillText("GAME OVER", width / 2 - 60, height / 2 - 50);
-			ctx.fillText("YOUR RESULT:" + points, width / 2 - 60, height / 2 - 30);
-		}, 100);
-		
-	};
+		ctx.fillStyle = "Black";
+		ctx.font = "10pt Arial";
+		ctx.fillText("GAME OVER", width / 2 - 60, height / 2 - 50);
+		ctx.fillText("YOUR RESULT:" + points, width / 2 - 60, height / 2 - 30);
+
+    $("#inline").click();
+
+	}, 100);
+};
 	
 window.gameStart = function() {
   c = document.getElementById('c'), 
