@@ -5,14 +5,33 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
     <script type="text/javascript" src="fancybox/jquery.fancybox.pack.js"></script>
     <script type="text/javascript" src="scripts/game.js"></script>
+
+    <script type="text/javascript" src="mustache.js"></script>
+    <script type="text/javascript" src="underscore-min.js"></script>
+    <script type="text/javascript" src="backbone-min.js"></script>
+    <script type="text/javascript" src="offer-model.js"></script>
+    <script type="text/javascript" src="virtual-good-model.js"></script>
+    <script type="text/javascript" src="user-location-model.js"></script>
+    <script type="text/javascript" src="initial-prompt-view.js"></script>
+    <script type="text/javascript" src="claim-view.js"></script>
+    <script type="text/javascript" src="thanks-view.js"></script>
+    <script type="text/javascript" src="offers-router.js"></script>
+
+
     <link type="text/css" rel="stylesheet" href="fancybox/jquery.fancybox.css"  media="screen" />
     <script type="text/javascript">
       $(document).ready(function() {
-        $("#inline").fancybox({
-		      'hideOnContentClick': true
-  	    });
+        // For Klickpush portion of demo
+        window.klickpushRouter = new OffersRouter();
+        Backbone.history.start();
 
-        window.gameStart()
+        $("#inline").fancybox({
+          autoSize: false,
+          height: 500,
+          width: 500
+        });
+
+        window.gameStart();
       });
     </script>
 
@@ -39,6 +58,31 @@
       <a id="inline" href="#klickpush">Hidden fancybox trigger (called in code)</a>
       <div id="klickpush">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
     </div>
+
+    <!-- Klickpush, mf -->
+    <script type="template/mustache" id="initialPromptTemplate">
+      <div class="offer_text"></div>
+      <div class="vgood_offer"></div>
+      <div class="song_offer"></div>
+      <div class="song_player"></div>
+      <button class="btn generate">Generate</button>
+      <button class="btn claim">Claim</button>
+    </script>
+    <script type="template/mustache" id="claimViewTemplate">
+      <div class="offer_text">Claim your offer</div>
+      <div class="vgood_offer"><img src="virtual_good_images/{{vgoodImgSrc}}" alt="{{vgoodName}}" />
+      <div class="song_offer"><img src="{{singleImgSrc}}" alt="{{singleImgName}}" />
+      <form>
+        <input id="email_address" type="text" class="span3" placeholder="Enter Email Address" />
+      </form>
+      <button class="btn cancel">Cancel</button>
+      <button class="btn submit">Submit</button>
+    </script>
+    <script type="template/mustache" id="thanksViewTemplate">
+      <div class="thanks_text">Thank You! Your song is on the way</div>
+      <button class="btn getmore">Get More Offers</button>
+    </script>
+    <iframe id="apiframe" src="http://api.klickpush.com/apiframe" style="display:none" />
   </body>
 </html>
 

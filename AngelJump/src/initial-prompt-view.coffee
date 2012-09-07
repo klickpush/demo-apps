@@ -15,6 +15,7 @@ class InitialPromptView extends Backbone.View
     @userLocationModel  = params.userLocationModel
 
     window.addEventListener("message", @messageDispatcher, false)
+
     that = this
 
   render: ->
