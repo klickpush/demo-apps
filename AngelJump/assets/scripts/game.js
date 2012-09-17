@@ -277,7 +277,8 @@ var GameOver = function(){
 		ctx.fillText("GAME OVER", width / 2 - 60, height / 2 - 50);
 		ctx.fillText("YOUR RESULT:" + points, width / 2 - 60, height / 2 - 30);
 
-    $("#inline").click();
+    // Open Klickpush offer modal
+    $('#kpModal').modal({show: true});
 
 	}, 100);
 };
