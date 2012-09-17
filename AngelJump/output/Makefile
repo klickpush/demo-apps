@@ -6,5 +6,5 @@ demo:
 	cp ../src/*.js .
 
 clean:
-	rm -rf *.js *.json *.html *.png *.css fancybox scripts virtual_good_images
+	rm -rf *.js *.json *.html *.png *.css scripts virtual_good_images bootstrap
 
