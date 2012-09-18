@@ -14,7 +14,7 @@ class OffersRouter extends Backbone.Router
     "thanks": "thanks"
 
   default: ->
-    window.location.hash = "offer"
+    window.location.hash = "start"
 
   # Start here
   offer: ->

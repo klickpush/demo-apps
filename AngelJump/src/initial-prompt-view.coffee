@@ -6,21 +6,31 @@ that = null   # Kind of a dumb hack, clean up later
 
 class InitialPromptView extends Backbone.View
   events:
-    'click .btn.generate':    'generateClicked'
     'click .btn.claim':       'claimClicked'
 
   initialize: (params) ->
+    that = this
+
     @offerModel         = params.offerModel
     @virtualGoodModel   = params.virtualGoodModel
     @userLocationModel  = params.userLocationModel
 
     window.addEventListener("message", @messageDispatcher, false)
 
-    that = this
+    # Configure the library
+    $('#apiframe')[0].contentWindow.postMessage
+      type:                   'init'
+      oauthConsumerKey:       'mOXeIFqH27ynJcq68WSYbIDabno4clNnWgwS3WXA'
+      oauthConsumerSecret:    'miGEx9kJjMA2UOtwjR0Qay9zrANuSYC1gCJO15HO'
+      oauthAccessTokenKey:    'EYolXAeRIRMcjeyXr4Ha634vq9aiZIshlpZHY7NN'
+      oauthAccessTokenSecret: '3wvZJxVCsuZqd4a6yRpLHj7VmEImULrKA0yjE9C5'
+    , "http://api.klickpush.com"
+
+    this
 
   render: ->
     @userLocationModel.getLocation =>
-      template  = $("#initialPromptTemplate").html()
+      template  = $("#gettingOfferTemplate").html()
       @$el.append(Mustache.to_html(template))
       console.log("latitude: #{@userLocationModel.get('latitude')}, longitude: #{@userLocationModel.get('longitude')}")
 
@@ -35,18 +45,6 @@ class InitialPromptView extends Backbone.View
       when 'singleOfferRequestComplete'
         that.singleOfferResponseHandler(event.data.response)
 
-  generateClicked: ->
-    console.log("Generate called")
-    
-    # Configure the library
-    $('#apiframe')[0].contentWindow.postMessage
-      type:                   'init'
-      oauthConsumerKey:       'mOXeIFqH27ynJcq68WSYbIDabno4clNnWgwS3WXA'
-      oauthConsumerSecret:    'miGEx9kJjMA2UOtwjR0Qay9zrANuSYC1gCJO15HO'
-      oauthAccessTokenKey:    'EYolXAeRIRMcjeyXr4Ha634vq9aiZIshlpZHY7NN'
-      oauthAccessTokenSecret: '3wvZJxVCsuZqd4a6yRpLHj7VmEImULrKA0yjE9C5'
-    , "http://api.klickpush.com"
-
   requestOffer: ->
     # Send a message to the iframe handler requesting an offer
     # Pass a callback that renders the offer when we return
@@ -60,6 +58,10 @@ class InitialPromptView extends Backbone.View
   # Action methods
   singleOfferResponseHandler: (singleArray) ->
     if singleArray.length > 0
+      @$el.empty()
+      template  = $("#initialPromptTemplate").html()
+      @$el.append(Mustache.to_html(template))
+
       # Should factor more view logic into offer model
       @offerModel.set(singleArray[0])
       @getRandomVirtualGood()
