@@ -1,0 +1,45 @@
+#content {
+  text-align: center;
+}
+
+#kpModal{
+    background-image:url("images/splash-bg-dark.jpg");
+}
+
+.offer_text{
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 5px;
+    color: black;
+	padding: 5px;
+}
+
+.kp_logo{
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.vgood_offer{
+	margin-bottom: 5px;
+}
+
+.song_offer{
+	margin-bottom: 5px;
+}
+
+.vgood_offer img{
+	margin-bottom: 5px;
+}
+
+.song_offer img{
+	margin-bottom: 5px;
+}
+
+.thanks_text{
+	font-weight: bold;
+    font-size: 16px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    color: #FFBF3B;
+	padding: 5px;
+}
